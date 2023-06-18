@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="Icons/book.png">
+    <script src="script.js" defer></script>
+    <title>Library</title>
+</head>
+<body>
+    <header id="header">
+        <div>Library</div>
+    </header>
+    <main class="main">
+        <div id="btn-container">
+            <button type="button" class="btn" id="add-btn"><span>+</span> Add Book</button>
+        </div>
+        <div id="card-container"></div>
+    </main>
+<div id="modal-container">
+    <modal id="modal">
+        <h2>Add a new book</h2>
+        <form>
+       <input type="text" id="title-input" name="title" placeholder="Title" required >
+       <input type="text" id="author-input" name="author" placeholder="Author" required >
+       <input type="number" id="page-input" name="page" placeholder="Pages" required >
+       <div>
+        <label for="read">Have you read it?</label>
+        <input type="checkbox" id="read" name="read"> 
+        </div>
+        <button type="submit" id="submit-btn">Submit</button>
+        </form>
+ 
+    </modal>
+</div>
+</body>
+</html>
