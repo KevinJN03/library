@@ -4,9 +4,6 @@ const submitBtn = document.getElementById("submit-btn")
 let cardContainer = document.getElementById("card-container")
 let input = document.querySelectorAll("input")
 let deleteBtn = document.querySelectorAll(".delete-btn")
-//let  readBtn = document.querySelectorAll(".read-btn");
-
-console.log(input)
 addBtn.onclick =  function(){
     modal.style.display = "flex"
 
@@ -15,26 +12,31 @@ addBtn.onclick =  function(){
 let myLibrary = [];
 
 function Book(title, author, pages, read) {
-  // the constructor...
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.read = read
- 
-  
+
+}
+
+function clearCards(){
+    const cards = document.querySelectorAll(".card");
+    for (let i=0; i< cards.length; i++){
+        cards[i].remove()
+    }
+    console.log("Cleared Container")
 }
 
 function addBookToLibrary() {
-  for(let i= myLibrary.length; i >= 0; i--) {
-    // for every book  want to add it to the card container
-    console.log("length of library", myLibrary.length)
-    console.log(myLibrary[i])
-    if(i == myLibrary.length-1){
-        console.log(i)
+    
+    //if(myLibrary.length != 0){
+        clearCards()
+  for(let i= 0; i < myLibrary.length; i++) {
+    // for every book  want to add it to the card container    
     const div = document.createElement("div")
     div.classList.add("card");
     const title = document.createElement("h2");
-    title.textContent = myLibrary[i].title;
+    title.textContent = `"${myLibrary[i].title}"`;
 
     const author = document.createElement("h2");
     author.textContent =  myLibrary[i].author;
@@ -43,19 +45,23 @@ function addBookToLibrary() {
     pages.textContent =   myLibrary[i].pages;
 
     const read = document.createElement("button");
+    read.setAttribute("onclick", `changeReadStatus(${i})`)
     read.classList.add("read-btn")
-    read.textContent = myLibrary[i].read;
+    
 
-    if(read.textContent == "No"){
-        read.style.backgroundColor = "red"
+    if(myLibrary[i].read == false){
+        read.textContent = "No"
+      read.classList.add("not-checked")
     } else {
-        read.style.backgroundColor ="green"
+        read.textContent = "Yes"
+      read.classList.add("checked")
+      
     }
-
 
     const btn = document.createElement("button");
     btn.classList.add("delete-btn");
-    btn.textContent = "Delete"
+    btn.textContent = "Delete";
+    btn.setAttribute("onclick", `removeBook(${i})`)
     btn.setAttribute("type", "button")
     
     div.append(title);
@@ -66,20 +72,23 @@ function addBookToLibrary() {
     div.append(btn)
    cardContainer.append(div)
 }
+//}
 
   }
-}
+
+  
+
 
 (document.querySelector("form")).addEventListener('submit', function(e) {
-    console.log("dajfhgkdajfh")
   e.preventDefault();
     let checkbox = ""
    if((input[3]).checked){
-        checkbox = "Yes"
+        checkbox = true
+        input[3].classList.add("checked")
    } else {
-    checkbox = "No"
+    checkbox = false
+    input[3].classList.add("not-checked")
    }
-  input[0].setAttribute('required', '');
     const book = new Book(input[0].value, input[1].value, input[2].value, checkbox);
     myLibrary.push(book)   
     addBookToLibrary()
@@ -89,14 +98,39 @@ function addBookToLibrary() {
 });
 
 
+cardContainer.addEventListener("mouseover", function() {
+  let deleteBtn = document.querySelectorAll(".delete-btn")
+     let readBtn = document.querySelectorAll(".read-btn");
+     const card = document.querySelectorAll(".card")
+     console.log(("deletbtn length", deleteBtn.length))
 
+
+
+    // for(let i = 0; i <= readBtn.length; i++){
+    //     if(readBtn[i]){
+    //         readBtn[i].addEventListener("click", function(){
+
+    //             let btnContent = readBtn[i].textContent
+    //             if(btnContent == "Yes"){
+    //                 readBtn[i].textContent ="No"
+    //                 readBtn[i].classList.remove("checked")
+    //                 readBtn[i].classList.add("not-checked")
+    //             }
+    //             else if(btnContent == "No") {
+    //                 readBtn[i].textContent = "Yes"
+    //                 readBtn[i].classList.remove("not-checked")
+    //                 readBtn[i].classList.add("checked")
+    //             }
+    //     })
+    //     }
+    // }
+})
 
 window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = "none";
     }
   }
-
 
 
 
@@ -107,47 +141,27 @@ function clearInput(){
     input[3].checked = false;
 }
 
-function deleteCard(num){
-    const card = document.querySelectorAll(".card");
-    console.log(card)
-    console.log("cards", card)
-   card[num].remove()
+function removeBook(index){
+ 
+    myLibrary.splice(index,1)
+    addBookToLibrary()
+    
+ 
 }
 
-const observer = new MutationObserver(() => {
-    const deleteBtn = document.querySelectorAll('.delete-btn'); // Select all delete buttons
-     let readBtn = document.querySelectorAll(".read-btn");
-    for(let i = 0; i < deleteBtn.length; i++){
-        if(deleteBtn[i]){
-            deleteBtn[i].addEventListener("click", function(){
-            deleteCard(i);
-                myLibrary.splice(i, i)
-        })
-        }
 
-    }
-
-    for(let i = 0; i <= readBtn.length; i++){
-        if(readBtn[i]){
-            readBtn[i].addEventListener("click", function(){
-
-                let btnContent = readBtn[i].textContent
-                if(btnContent == "Yes"){
-                    readBtn[i].textContent ="No"
-                    readBtn[i].style.backgroundColor = "black"
-                }
-                
-                else if(btnContent == "No") {
-                    readBtn[i].textContent = "Yes"
-                    readBtn[i].style.backgroundColor = "green"
-                }
-        })
-        }
-
-    }
-    
-    
-  });
-  
-  observer.observe(document.body, { childList: true, subtree: true }); // Observe changes in the document body and its descendants
  
+const changeReadStatus = (index) => {
+    
+    console.log(myLibrary[index])
+
+    if(myLibrary[index].read === false){
+        myLibrary[index].read = true
+
+    } else {
+        myLibrary[index].read = false 
+    }
+
+    addBookToLibrary()
+    console.log("after", myLibrary[index])
+}

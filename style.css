@@ -1,26 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
 
+:root {
+    --beige: #F5F1E3;
+}
 * {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     /* outline: dashed; */
 }
+html {
+    background-color: #d7c9b7;
+}
 
 body {
     position: relative;
+
     
 }
 #header {
     width: 100%;
-    height: 7vh;
+    height: 10vh;
     box-shadow: 0px 25px 18px -13px rgba(0,0,0,0.42);
+    background-color: var(--beige);
+    position: sticky
     
+
 }
 #header div {
     height: 100%;
 font-weight: 700;
-font-size: 2.5rem;
+font-size: 3.5rem;
 margin-left: 10%;
 display: flex;
 
@@ -45,18 +55,23 @@ display: flex;
 justify-content: center;
 }
 #add-btn {
-    max-width: 10%;
+    
     margin-top: 10vh;
+    margin-bottom: 50px;
     font-size: 1.8rem;
-    background: black;
+    background: var(--beige);
     border-radius: 20px;
     padding: 10px 20px;
     white-space: nowrap;
-    color: white
+    color: black;
+    font-weight: 600;
+    justify-content: center;
+    align-items: center;
 } 
 span {
     font-weight: 800;
-    font-size: 2rem
+    font-size: 1.5rem;
+
 }
 #modal-container {
     display: none; /* Hidden by default */
@@ -142,13 +157,14 @@ input[type="checkbox"]{
     grid-template-columns: repeat(auto-fit, minmax(200px, 500px));
     
     margin-top: 40px;
-   
+   gap: 40px;
+   margin-bottom: 7%;
     
     /* direction: rtl */
 }
 .card{
     border: 3px solid black;
-    width:  300px;
+    width:  auto;
     border-radius: 15px;
     height: auto;
     display: flex;
@@ -156,16 +172,20 @@ input[type="checkbox"]{
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
-    padding: 20px
+    gap: 30px;
+    padding: 20px 0px;
+    background-color: #F5F1E3;
+    background-blend-mode: 
 
 } 
 
 .delete-btn {
-    background: black;
+    background: #D76C6E;
     color: white;
     font-size: 1.5rem;
     padding: 10px 20px;
-    border-radius: 20px
+    border-radius: 20px;
+    width: 80%
 
 
 }
@@ -175,6 +195,53 @@ input[type="checkbox"]{
     color: white;
     font-size: 1.5rem;
     padding: 10px 20px;
-    border-radius: 20px
+    border-radius: 20px;
+    width: 80%
+
+}
+
+.checked {
+    background-color: #C4DCBC
+}
+
+.not-checked {
+    
+    background-color: #F4D4DC;
+}
+
+@media screen and (max-width: 480px){
+
+    #header div {
+        font-size: 2.5rem;
+        justify-content: center;
+        margin: 0;
+    }
+
+    #add-btn{
+    font-size: 1.5rem;
+    padding: 10px 10px;
+    border-radius: 10x;
+    }
+
+    
+#card-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.card{
+    font-size: 1.2rem;
+    gap: 10px;
+    border: none;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+
+}
+.read-btn, .delete-btn{
+    font-size: 1.2rem; 
+    width: 40%  ;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    border: 1px solid white
+}
+
 
 }
