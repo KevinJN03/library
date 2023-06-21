@@ -31,6 +31,7 @@ function addBookToLibrary() {
     
     //if(myLibrary.length != 0){
         clearCards()
+
   for(let i= 0; i < myLibrary.length; i++) {
     // for every book  want to add it to the card container    
     const div = document.createElement("div")
@@ -90,41 +91,13 @@ function addBookToLibrary() {
     input[3].classList.add("not-checked")
    }
     const book = new Book(input[0].value, input[1].value, input[2].value, checkbox);
-    myLibrary.push(book)   
+    myLibrary.push(book)
+    myLibrary.reverse()   
     addBookToLibrary()
      modal.style.display = "none"
      clearInput()
    
 });
-
-
-cardContainer.addEventListener("mouseover", function() {
-  let deleteBtn = document.querySelectorAll(".delete-btn")
-     let readBtn = document.querySelectorAll(".read-btn");
-     const card = document.querySelectorAll(".card")
-     console.log(("deletbtn length", deleteBtn.length))
-
-
-
-    // for(let i = 0; i <= readBtn.length; i++){
-    //     if(readBtn[i]){
-    //         readBtn[i].addEventListener("click", function(){
-
-    //             let btnContent = readBtn[i].textContent
-    //             if(btnContent == "Yes"){
-    //                 readBtn[i].textContent ="No"
-    //                 readBtn[i].classList.remove("checked")
-    //                 readBtn[i].classList.add("not-checked")
-    //             }
-    //             else if(btnContent == "No") {
-    //                 readBtn[i].textContent = "Yes"
-    //                 readBtn[i].classList.remove("not-checked")
-    //                 readBtn[i].classList.add("checked")
-    //             }
-    //     })
-    //     }
-    // }
-})
 
 window.onclick = function(event) {
     if (event.target == modal) {
@@ -153,15 +126,10 @@ function removeBook(index){
  
 const changeReadStatus = (index) => {
     
-    console.log(myLibrary[index])
-
     if(myLibrary[index].read === false){
         myLibrary[index].read = true
-
     } else {
         myLibrary[index].read = false 
     }
-
     addBookToLibrary()
-    console.log("after", myLibrary[index])
 }
