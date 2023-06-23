@@ -11,12 +11,13 @@ addBtn.onclick =  function(){
 
 let myLibrary = [];
 
-function Book(title, author, pages, read) {
-  this.title = title;
+class Book {
+  constructor(title, author, pages, read){
+    this.title = title;
   this.author = author;
   this.pages = pages;
   this.read = read
-
+  }
 }
 
 function clearCards(){
@@ -24,7 +25,7 @@ function clearCards(){
     for (let i=0; i< cards.length; i++){
         cards[i].remove()
     }
-    console.log("Cleared Container")
+    
 }
 
 function addBookToLibrary() {
@@ -95,7 +96,8 @@ function addBookToLibrary() {
     myLibrary.reverse()   
     addBookToLibrary()
      modal.style.display = "none"
-     clearInput()
+     clearInput();
+    
    
 });
 
